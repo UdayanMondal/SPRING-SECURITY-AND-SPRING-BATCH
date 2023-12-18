@@ -1,0 +1,19 @@
+<html>
+<body>
+Hi {FULLNAME},<br/>
+<br/>
+Your Employer data is Fetched  successfull.
+<br/>
+Please find your Order Amount  below
+<br/>
+Order Amount: {EMPLOYER-NAME}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+Thanks,<br/>
+Admin Team
+</body>
+</html>

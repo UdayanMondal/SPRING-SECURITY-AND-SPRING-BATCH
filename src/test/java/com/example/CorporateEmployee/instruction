@@ -1,0 +1,143 @@
+Method -Post 
+API NAME : http://localhost:8080/public/importData     
+use : upload only .csv file and date will persist in the database in the table "emp.EMPLOYER_INFO"
+Note : The sample .csv is attached with the project but user can upload the .csv file from his device externally .
+
+
+Method -Post 
+API NAME : http://localhost:8080/public/employee/create   
+use :  Employee Details will be saved in the table "emp.emp_dtl" and table "emp.emp"
+
+Method -Get 
+API NAME : http://localhost:8080/public/employee/update/{id}
+PathVariable -id
+use :  Particular records will be updated   in the table "emp.emp_dtl" and table "emp.emp".
+
+
+
+Method -Get 
+API NAME : http://localhost:8080/public/employee/detail
+use : Fetch  All  records will be updated   from  the table "emp.emp_dtl" and table "emp.emp".
+
+
+
+Method -Get 
+API NAME : http://localhost:8080/private/employee/fetch/{id}
+RequestParam  - phoneNumber
+PathVariable -id
+use : Particular    records will be fetched    from  the table "emp.emp_dtl" and table "emp.emp" and a csv file is send into receiver mail address and sms will be sent to user given phone number .
+
+Note : The address of the receiver mail address change be changed by changing the value of tag "receiverMailAddress" in the application.properties file 
+
+
+
+
+Method -Delete 
+API NAME : http://localhost:8080/private/employee/delete/{id}
+
+PathVariable -id
+use : Particular Record   from  the table "emp.emp_dtl" and table "emp.emp" will be deleted .
+
+
+
+
+
+Method -Post 
+API NAME : http://localhost:8080/authenticate
+use : Generate the JWT token from the username and password.
+Note : Default user (Having permission ) - "mondaludayan8@gmail.com"
+      Default password - "password"
+	  
+	  
+	  
+Method -Post 
+API NAME : http://localhost:8080/public/registerNewUser/
+use : Register new user with password in the table "emp.role" ;
+ "emp.user_role" and "emp.user"
+Note : Default user (Having permission ) - "mondaludayan8@gmail.com"
+      Default password - "password"
+	  
+	  
+	  Method -Put 
+API NAME : http://localhost:8080/private/employee/update/{id}
+PathVariable -id
+use : Particular Record   in  the table "emp.emp" will be updated .
+Note :  In the Request payload json  please 
+a)please keep email address unique 
+b) pan number and adharnumber is not updatable 
+
+
+ PLEASE NOTE : 
+ 1)ALL THE PUBLIC API ARE OPEN FOR USE BUT THE PRIVATE API HAS JWT ROLED BASED AUTHENTICATION SECURITY .SO please generate jwt token and then hit  the private api  with request header
+"Authorization"  having value starting with Bearer followed by space and then again followed by generated jwt token.
+2)Please create the SCHEMA in the database MYSQL with the name "emp" before running any api request.All required tables will be automatically created while running the server .
+3)ALL "email"  and "username" fields in the request payload are unique and not blank .
+4)The sample csv is file is attached in the project in the location "*\Corporate Employee\Corporate-Employee\src\test\java\com\example\Corporate\Employee".
+5) Plase install Eclipse ,Postman and MYSQL database and import this project  for Testing all the api manually .
+6)set the local server port to 8080.
+7)Dont change any tag value in the application.properties file unless it is neccessary except  the below tag 
+a)"user.allowed"
+b)"file.Location"
+c)"receiverMailAddress"
+d)employer.name
+
+Table name Used  :
+1)select * emp.role ;
+2)select *   from emp.user_role t;
+3)select *  from emp.user;
+4)Select * from emp.emp_dtl t ;
+5)select * from emp.emp;
+6)select * from emp.EMPLOYER_INFO;
+
+
+SAMPLE  Request payload for post and put api :
+
+1)http://localhost:8080/public/employee/create
+
+{ 
+"name" :"UDAYAN",	
+"department" : "Electrical",	
+"address" : "5 NY ,USA",	
+ "dob" : "12-06-2000",	
+"email" :"abcdf23tgfhhf@gmail.com",
+"employeerRole" :"CareTaker",
+ "salary":"40000",
+ "employerName": "",
+ "panNumber":"pan123",
+ "adhaarNumber":"123XYZ"
+ }
+ 
+ 2)http://localhost:8080/authenticate 
+ {
+   "userName": "mondaludayan8@gmail.com",
+	 "userPassword":"password"
+}
+
+3)http://localhost:8080/public/registerNewUser
+
+
+ {
+  "userName":"mondaludayan274@gmail.com",
+    
+	 "userFirstName":"udayan",
+    
+	 "userLastName":"mondal",
+    
+	 "userPassword":"1234ere" ,
+	 "email":"mondaludayan274@gmail.com"
+ }
+ 
+ 4)http://localhost:8080/private/employee/update/{id}
+ 
+ { 
+"name" :"SAM",	
+"department" : "Electrical",	
+"address" : "5 NY ,USA",	
+ "dob" : "12-06-2000",	
+"email" :"abcdfgjgttgf@gmail.com",
+"employeerRole" :"CareTaker",
+ "salary":"40000",
+ "employerName": "",
+ "panNumber":"xyz123",
+ "adhaarNumber":"123XYZ"
+ }
